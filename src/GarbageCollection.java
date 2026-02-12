@@ -1,17 +1,24 @@
-public class GarbageCollection {
-    
-    // TODO: Override the finalize() method
-    // protected void finalize()
-    // Inside it, print "Garbage Collected"
+class GarbageDemo {
 
+    @SuppressWarnings("removal")
+    @Override
+    protected void finalize() {
+        System.out.println("Garbage Collected");
+    }
+}
+
+public class GarbageCollection {
     public static void main(String[] args) {
-        // TODO: Create an object of GarbageCollection class
-        
-        // TODO: Make the object eligible for garbage collection (e.g., assign null)
-        
-        // TODO: Request Garbage Collection using System.gc()
-        
-        // Tip: You might need a small delay or simply exiting might trigger it in some JVMs, 
-        // but System.gc() is the standard call.
+
+        GarbageDemo obj = new GarbageDemo();
+        obj = null;      // eligible for GC
+
+        System.gc();     // request garbage collection
+
+        // give JVM some time (still not guaranteed)
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
     }
 }
